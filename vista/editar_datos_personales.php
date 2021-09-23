@@ -31,7 +31,7 @@ if($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 3){
               <span><i class="fas fa-check m-1"></i>Se cambio password correctamente</span>
            </div>
             <div class="alert alert-danger text-center" id="noupdate" style="display: none;">
-                <span><i class="fas fa-times m-1"></i>Los password no coinciden</span>
+                <span><i class="fas fa-times m-1"></i>Los password no coinciden</span> 
             </div>
         <form id="form-pass">
             <div class="input-group mb-3">
