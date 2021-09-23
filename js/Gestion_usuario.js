@@ -74,7 +74,7 @@ $(document).ready(function(){
            $('#usuarios').html(template);
         });
     }
-    
+
     $(document).on('keyup','#buscar', function(){
         let valor = $(this).val();
 
@@ -87,6 +87,7 @@ $(document).ready(function(){
         }
     });
 
+    /*CREAR NUEVO USUARIO*/
     $('#form-crear').submit(e=>{
       let nombre = $('#nombre').val();
       let apellido = $('#apellido').val();

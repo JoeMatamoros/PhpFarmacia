@@ -65,7 +65,8 @@ $(document).ready(function(){
         })
 
     });
-
+    
+    /*EDITAR DATOS DE USUARIO */
     $('#form-usuario').submit(e =>{
         if(edit == true){
          
@@ -98,6 +99,7 @@ $(document).ready(function(){
         e.preventDefault();
     });
 
+    /*CAMBIAR PASSWORD */
     $('#form-pass').submit(e =>{
         let oldpass = $('#oldpass').val();
         let newpass = $('#newpass').val();
@@ -121,6 +123,7 @@ $(document).ready(function(){
         e.preventDefault();
     })
 
+    /*CAMBIAR FOTO DE USUARIO */
     $('#form-photo').submit(e=>{
         let formData = new FormData($('#form-photo')[0]);
         $.ajax({
