@@ -7,7 +7,7 @@ class Usuario{
         $db = new Conexion();
         $this->acceso = $db->pdo;
     } 
-
+    /*BUSCAR USUARIO Y CONTRASENA EN LA BD PARA TENER ACCESO AL SISTEMA */
     function Loguearse($dni, $pass){
         $sql="SELECT *FROM usuario inner join tipo_us on us_tipo=id_tipo_us WHERE dni_us=:dni AND contrasena_us=:pass";
         $query = $this->acceso->prepare($sql);
@@ -15,7 +15,7 @@ class Usuario{
         $this->objetos = $query->fetchall();
         return $this->objetos;
     }
-
+    
     function obtener_datos($id){
         $sql="SELECT *FROM usuario join tipo_us on us_tipo=id_tipo_us AND id_usuario=:id";
         $query = $this->acceso->prepare($sql);
@@ -24,6 +24,7 @@ class Usuario{
         return $this->objetos;
     }
 
+    /*EDITAR O MODIFICAR DATOS EN LA BD Y EN EL SISTEMA */
     function editar($id_usuario,$telefono,$residencia,$correo,$sexo,$adicional){
         $sql="UPDATE usuario SET telefono_us=:telefono, residencia_us=:residencia, correo_us=:correo, sexo_us=:sexo, adicional_us=:adicional WHERE id_usuario=:id";
         $query = $this->acceso->prepare($sql);
@@ -36,7 +37,7 @@ class Usuario{
             ':adicional'=>$adicional
         ));
     }
-
+    /*CAMBIAR CONTRASENA EN LA DB */
     function cambiar_contra($id_usuario, $oldpass, $newpass){
         $sql="SELECT * FROM usuario WHERE id_usuario=:id AND contrasena_us=:oldpass";
         $query = $this->acceso->prepare($sql);
@@ -57,7 +58,7 @@ class Usuario{
             echo 'noupdate';
         }
     }
-
+    /*CAMBIAR FOTO DE USUARIO Y RUTA EN LA DB */
     function cambiar_photo($id_usuario,$nombre){
         $sql="SELECT avatar FROM usuario WHERE id_usuario=:id";
         $query = $this->acceso->prepare($sql);
@@ -72,6 +73,7 @@ class Usuario{
             ));
           return $this->objetos;
     }
+    /*BUSCAR USUARIO EN LA DB DINAMICAMENTE */
     function buscar(){
         if(!empty($_POST['consulta'])){
             $consulta = $_POST['consulta'];
@@ -89,6 +91,8 @@ class Usuario{
 
         }
     }
+
+    /*CREAR USUARIO EN EL SISTEMA, INSERTAR DATOS DE USER EN LA DB */
     function crear($nombre,$apellido,$edad,$dni,$pass,$tipo,$avatar){
         $sql ="SELECT id_usuario FROM usuario WHERE dni_us=:dni";
         $query=$this->acceso->prepare($sql);
@@ -112,6 +116,7 @@ class Usuario{
         }
     }
 
+    /*ASCENDER ROL DE USUARIO EN EL SISTEMA */
     function ascender($pass,$id_ascendido,$id_usuario){
         $sql ="SELECT id_usuario FROM usuario WHERE id_usuario=:id_usuario AND contrasena_us=:pass";
         $query=$this->acceso->prepare($sql);
@@ -128,6 +133,8 @@ class Usuario{
         }
 
     }
+
+    /*DESCENDER ROL DE USUARIO EN EL SISTEMA */
     function descender($pass,$id_descendido,$id_usuario){
         $sql ="SELECT id_usuario FROM usuario WHERE id_usuario=:id_usuario AND contrasena_us=:pass";
         $query=$this->acceso->prepare($sql);

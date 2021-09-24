@@ -145,6 +145,7 @@ $(document).ready(function(){
     $('#id_user').val(id);
     $('#funcion').val(funcion);
     });
+    
 /*Acceder al submit del formulario */
     $('#form-confirmar').submit(e=>{
       let pass= $('#oldpass').val();
