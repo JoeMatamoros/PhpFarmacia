@@ -75,8 +75,8 @@
           </li>
           <li class="nav-header">Almacén</li>
           <li class="nav-item">
-            <a href="../gallery.html" class="nav-link">
-              <i class="nav-icon far fa-image"></i>
+            <a href="adm_atributo.php" class="nav-link">
+              <i class="nav-icon fas fa-vials"></i>
               <p>
                 Gestión atributo
               </p>

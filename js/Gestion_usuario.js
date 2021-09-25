@@ -121,6 +121,7 @@ $(document).ready(function(){
           $('#add').hide(2000);
           $('#form-crear').trigger('reset');
           buscar_datos();
+
         } else{
           $('#noadd').hide('slow');
           $('#noadd').show(1000);
@@ -140,9 +141,8 @@ $(document).ready(function(){
     funcion='ascender';
     $('#id_user').val(id);
     $('#funcion').val(funcion);
-
-
     });
+
 
     $(document).on('click','.descender',(e)=>{
       const elemento =$(this)[0].activeElement.parentElement.parentElement.parentElement.parentElement;
@@ -154,15 +154,15 @@ $(document).ready(function(){
     $('#funcion').val(funcion);
     });
 
-/*EVENTO PARA BORRAR USUARIO */
-$(document).on('click','.borrar-usuario',(e)=>{
-  const elemento =$(this)[0].activeElement.parentElement.parentElement.parentElement.parentElement;
-  const id=$(elemento).attr('usuarioId');
-  funcion='borrar_usuario';
-  $('#id_user').val(id);
-  $('#funcion').val(funcion);
-});
-    
+    /*EVENTO PARA BORRAR USUARIO */
+    $(document).on('click','.borrar-usuario',(e)=>{
+      const elemento =$(this)[0].activeElement.parentElement.parentElement.parentElement.parentElement;
+      const id=$(elemento).attr('usuarioId');
+      funcion='borrar_usuario';
+      $('#id_user').val(id);
+      $('#funcion').val(funcion);
+    });
+        
 /*Acceder al submit del formulario */
     $('#form-confirmar').submit(e=>{
       let pass= $('#oldpass').val();
@@ -171,11 +171,12 @@ $(document).on('click','.borrar-usuario',(e)=>{
     
       $.post('../controlador/UsuarioController.php',{pass,id_usuario,funcion},(response)=>{
         console.log(response);
-        if(response =='ascendido' || response=='descendido' || response=='borrado'){
+        if(response =='ascendido' || response =='descendido' || response =='borrado'){
           $('#confirmado').hide('slow');
           $('#confirmado').show(1000);
           $('#confirmado').hide(2000);
           $('#form-confirmar').trigger('reset');
+
         } else{
           $('#rechazado').hide('slow');
           $('#rechazado').show(1000);
