@@ -53,10 +53,10 @@ if($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 3 ){
            </div>
            <div class="card-body">
              <div class="alert alert-success text-center" id="add" style="display: none;">
-              <span><i class="fas fa-check m-1"></i>Usuario agregado correctamente.</span>
+              <span><i class="fas fa-check m-1"></i>Tipo agregado correctamente.</span>
             </div>
             <div class="alert alert-danger text-center" id="noadd" style="display: none;">
-                <span><i class="fas fa-times m-1"></i>El DNI ya se encuentra registrado.</span>
+                <span><i class="fas fa-times m-1"></i>Este tipo ya se encuentra registrado.</span>
             </div>
              <form id="form-crear-tipo">
                 <div class="form-group">
@@ -86,10 +86,10 @@ if($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 3 ){
            </div>
            <div class="card-body">
              <div class="alert alert-success text-center" id="add" style="display: none;">
-              <span><i class="fas fa-check m-1"></i>Usuario agregado correctamente.</span>
+              <span><i class="fas fa-check m-1"></i>Presentación agregada correctamente.</span>
             </div>
             <div class="alert alert-danger text-center" id="noadd" style="display: none;">
-                <span><i class="fas fa-times m-1"></i>El DNI ya se encuentra registrado.</span>
+                <span><i class="fas fa-times m-1"></i>La presentación ya se encuentra registrada.</span>
             </div>
              <form id="form-crear-presentacion">
                 <div class="form-group">
@@ -151,8 +151,23 @@ if($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 3 ){
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="card-body"></div>
-                                        <div class="card-footer"></div>
+                                        <div class="card-body p-0">
+                                            <table class="table table-over text-nowrap">
+                                                <thead class="table-success">
+                                                   <tr>
+                                                       <th>Laboratorio</th>
+                                                       <th>Logo</th>
+                                                       <th>Acción</th>
+                                                   </tr> 
+                                                </thead>
+                                                <tbody class="table-active" id="laboratorios">
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="card-footer">
+
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="tab-pane" id="tipo">
@@ -197,7 +212,7 @@ if($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 3 ){
     </section>
     <!-- /.content -->
   </div>
-  <!-- /.content-wrapper -->
+  
 <?php 
 include_once 'layouts/footer.php';
 }
