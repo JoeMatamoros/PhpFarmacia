@@ -37,21 +37,19 @@ $(document).ready(function(){
                        <tr labId="${laboratorio.id}">
                        <td>
                            <button class="avatar btn btn-info" title="Cambiar logo">
-                             <i class="far fa-image"></i>
+                              <i class="far fa-image"></i>
                             </button>
                             <button class="editar btn btn-success" title="Editar laboratorio">
-                              <i class="fas fa-pencil-alt"></i>
+                               <i class="fas fa-pencil-alt"></i>
                             </button>
                             <button class="borrar btn btn-danger" title="Borrar laboratorio">
-                              <i class="fas fa-trash-alt"></i>
+                               <i class="fas fa-trash-alt"></i>
                             </button>
                        </td>
                            <td>
-                                <img src="${laboratorio.avatar}" class="img-fluid img-circle" width="70" height="70">
+                               <img src="${laboratorio.avatar}" class="img-fluid img-circle" width="70" height="70">
                            </td>
-                           <td>${laboratorio.nombre}</td>
-                           
-                           
+                           <td>${laboratorio.nombre}</td> 
                        </tr> 
                ` ;
             });
