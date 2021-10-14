@@ -5,7 +5,7 @@ $usuario = new Usuario();
 session_start();
 $id_usuario = $_SESSION['usuario'];
 
-if($_POST['funcion'] == 'buscar_usuario'){
+if($_POST['funcion'] == 'buscar_usuario'){ 
     $json = array();
     $fecha_actual = new DateTime();
     $usuario->obtener_datos($_POST['dato']);

@@ -16,7 +16,7 @@ if($_POST['funcion'] == 'buscar'){
         $json[]=array(
             'id'=>$objeto->id_laboratorio,
             'nombre'=>$objeto->nombre,
-            'avatar'=>'../img/'.$objeto->avatar
+            'avatar'=>'../img/lab/'.$objeto->avatar
         );
     }
     $jsonstring =json_encode($json);

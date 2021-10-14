@@ -212,7 +212,7 @@ if($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 3){
                                         <input type="text" id="sexo" class="form-control">
                                         </div> 
                                     </div>
-                                    <div class="form-group row">
+                                    <div class="form-group row"> 
                                         <label for="adicional" class="col-sm-2 col-form-label">Información adicional</label>
                                         <div class="col-sm-10">
                                        <textarea class="form-control" id="adicional" cols="30" rows="10"></textarea>

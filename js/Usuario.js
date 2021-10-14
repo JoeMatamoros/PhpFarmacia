@@ -14,7 +14,7 @@ $(document).ready(function(){
             let edad='';
             let dni='';
             let tipo='';
-            let telefono='';
+            let telefono=''; 
             let residencia='';
             let correo='';
             let sexo='';

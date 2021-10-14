@@ -69,7 +69,7 @@ class Usuario{
             $query=$this->acceso->prepare($sql);
             $query->execute(array(
                 ':id'=>$id_usuario,
-                ':nombre'=>$nombre
+                ':nombre'=>$nombre 
             ));
           return $this->objetos;
     }
