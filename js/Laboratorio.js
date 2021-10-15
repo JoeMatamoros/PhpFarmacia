@@ -112,4 +112,63 @@ $(document).ready(function(){
         });
         e.preventDefault();
     })
+    /*ELIMINAR LABORATORIO */
+    $(document).on('click','.borrar',(e)=>{
+
+        funcion="borrar";
+        const elemento=$(this)[0].activeElement.parentElement.parentElement;
+        //console.log(elemento);
+        const id = $(elemento).attr('labId');
+        const nombre = $(elemento).attr('labNombre');
+        const avatar = $(elemento).attr('labAvatar');
+        
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+              confirmButton: 'btn btn-success',
+              cancelButton: 'btn btn-danger mr-1'
+            },
+            buttonsStyling: false
+          })
+          
+          swalWithBootstrapButtons.fire({
+            title: 'Desea eliminar el laboratorio '+nombre+'?',
+            text: "No podrás revertir la acción!",
+            imageUrl:''+avatar+'',
+            imageWidth:100,
+            imageHeight:100,
+            showCancelButton: true,
+            confirmButtonText: 'Si, deseo eliminar!',
+            cancelButtonText: 'No, cancelar!',
+            reverseButtons: true
+          }).then((result) => {
+            if (result.isConfirmed) {
+                $.post('../controlador/LaboratorioController.php',{id,funcion},(response)=>{
+                    if(response == 'borrado'){
+                        swalWithBootstrapButtons.fire(
+                            'Eliminado!',
+                            'El laboratorio '+nombre+' fue eliminado',
+                            'success'
+                          )
+                          buscar_lab();
+                    } else{
+                        swalWithBootstrapButtons.fire(
+                            'No se pudo eliminar!',
+                            'El laboratorio '+nombre+' no fue eliminado porque está siendo usado en un producto.',
+                            'error'
+                          ) 
+                    }
+                })
+              
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+
+              swalWithBootstrapButtons.fire(
+                'Cancelado!',
+                'El laboratorio '+nombre+' no fue eliminado',
+                'error'
+              )  
+            }
+          })
+    })
+
+
 });
