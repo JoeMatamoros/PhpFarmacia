@@ -7,6 +7,7 @@ if($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 3 ){
   <?php
   include_once 'layouts/nav.php';
   ?>
+<!--MODAL PARA CAMBIO DE LOGO DE LABORATORIO-->
 <div class="modal fade" id="cambiologo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -52,7 +53,7 @@ if($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 3 ){
     <div class="modal-content">
        <div class="card card-success">
            <div class="card-header">
-               <h3 class="card-title">Crear laboratorio</h3>
+               <h3 class="card-title">Laboratorios</h3>
                <button data-dismiss="modal" aria-label="close" class="close">
                    <span aria-hidden="true" >&times;</span>
                </button>
@@ -64,14 +65,18 @@ if($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 3 ){
             <div class="alert alert-danger text-center" id="noadd-laboratorio" style="display: none;">
                 <span><i class="fas fa-times m-1"></i>El laboratorio ya se encuentra registrado.</span>
             </div>
+            <div class="alert alert-success text-center" id="edit-lab" style="display: none;">
+              <span><i class="fas fa-check m-1"></i>Laboratorio editado correctamente.</span>
+            </div>
              <form id="form-crear-laboratorio">
                 <div class="form-group">
                     <label for="nombre-laboratorio">Nombre</label>
                     <input id="nombre-laboratorio" type="text" class="form-control" placeholder="Ingrese nombre" required>
+                    <input type="hidden" id="id_editar_lab">
                 </div>
            </div>
            <div class="card-footer">
-                <button type="submit" class="btn bg-gradient-primary float-right m-1">Crear</button>
+                <button type="submit" class="btn bg-gradient-primary float-right m-1">Guardar</button>
                 <button type="button" data-dismiss="modal" class="btn btn-outline-secondary float-right m-1">Cerrar</button>
             </form>
            </div>

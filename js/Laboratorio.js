@@ -1,11 +1,20 @@
 $(document).ready(function(){
     buscar_lab();
     var funcion;
+    var edit = false; //VARIABLE DE BANDERA
 
     $('#form-crear-laboratorio').submit(e=>{
+
         let nombre_laboratorio=$('#nombre-laboratorio').val();
-        funcion ='crear';
-        $.post('../controlador/LaboratorioController.php',{nombre_laboratorio,funcion},(response)=>{
+        let id_editado=$('#id_editar_lab').val();
+        if(edit == false){
+            funcion='crear';
+        }else {
+            funcion ='editar';
+        }
+        
+
+        $.post('../controlador/LaboratorioController.php',{nombre_laboratorio,id_editado,funcion},(response)=>{
             //console.log(response);
             if(response == 'add'){
                 $('#add-laboratorio').hide('slow');
@@ -14,13 +23,23 @@ $(document).ready(function(){
                 $('#form-crear-laboratorio').trigger('reset');
                 buscar_lab();
 
-            } else{
+            } 
+            if(response == 'noadd'){
                 $('#noadd-laboratorio').hide('slow');
                 $('#noadd-laboratorio').show(1000);
                 $('#noadd-laboratorio').hide(2000);
                 $('#form-crear-laboratorio').trigger('reset');
 
             }
+
+            if(response == 'edit'){
+                $('#edit-lab').hide('slow');
+                $('#edit-lab').show(1000);
+                $('#edit-lab').hide(2000);
+                $('#form-crear-laboratorio').trigger('reset');
+                buscar_lab(); 
+            }
+            edit == false;
         })
         e.preventDefault();
     });
@@ -28,7 +47,6 @@ $(document).ready(function(){
     function buscar_lab(consulta){
         funcion='buscar';
         $.post('../controlador/LaboratorioController.php',{consulta,funcion},(response)=>{
-            //console.log(response);
             /*La variable laboratorios viene del html con id="laboratorios" ubicado en tbody */
             const laboratorios = JSON.parse(response);
             let template ='';
@@ -39,7 +57,7 @@ $(document).ready(function(){
                            <button class="avatar btn btn-info" title="Cambiar logo type="button" data-toggle="modal" data-target="#cambiologo">
                               <i class="far fa-image"></i>
                             </button>
-                            <button class="editar btn btn-success" title="Editar laboratorio">
+                            <button class="editar btn btn-success" title="Editar laboratorio" type="button" data-toggle="modal" data-target="#crearlaboratorio">
                                <i class="fas fa-pencil-alt"></i>
                             </button>
                             <button class="borrar btn btn-danger" title="Borrar laboratorio">
@@ -57,6 +75,7 @@ $(document).ready(function(){
         })
     }
 
+    /*FUNCION PARA EL BUSCADOR DINAMICO*/
     $(document).on('keyup','#buscar-laboratorio',function(){
        let valor = $(this).val();
        if(valor!=''){
@@ -82,8 +101,7 @@ $(document).ready(function(){
         $('#funcion').val(funcion);
         $('#id_logo_lab').val(id);
     })
-
-     /*CAMBIAR LOGO DE LABORATORIO */
+      /*MANDAR LOS DATOS AL FORMULARIO DE LOGO */
      $('#form-logo').submit(e=>{
         let formData = new FormData($('#form-logo')[0]);
         $.ajax({
@@ -112,6 +130,7 @@ $(document).ready(function(){
         });
         e.preventDefault();
     })
+
     /*ELIMINAR LABORATORIO */
     $(document).on('click','.borrar',(e)=>{
 
@@ -143,6 +162,7 @@ $(document).ready(function(){
           }).then((result) => {
             if (result.isConfirmed) {
                 $.post('../controlador/LaboratorioController.php',{id,funcion},(response)=>{
+                    edit == false;
                     if(response == 'borrado'){
                         swalWithBootstrapButtons.fire(
                             'Eliminado!',
@@ -160,14 +180,25 @@ $(document).ready(function(){
                 })
               
             } else if (result.dismiss === Swal.DismissReason.cancel) {
-
-              swalWithBootstrapButtons.fire(
-                'Cancelado!',
-                'El laboratorio '+nombre+' no fue eliminado',
-                'error'
-              )  
+                swalWithBootstrapButtons.fire(
+                  'Cancelado!',
+                  'El laboratorio '+nombre+' no fue eliminado',
+                  'error'
+                )  
             }
           })
+    })
+
+    /*EDITAR LABORATORIO */
+    $(document).on('click','.editar',(e)=>{
+
+        const elemento=$(this)[0].activeElement.parentElement.parentElement;
+        const id = $(elemento).attr('labId');
+        const nombre = $(elemento).attr('labNombre');
+        $('#id_editar_lab').val(id);
+        $('#nombre-laboratorio').val(nombre);
+        edit = true;
+        
     })
 
 

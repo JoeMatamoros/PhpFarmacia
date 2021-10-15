@@ -12,8 +12,8 @@ if($_SESSION['us_tipo'] == 2){
     <title>Tecnico</title>
 </head>
 <body>
-    <h1>Hola Tecnico</h1>
-    <a href="../controlador/Logout.php">Cerrar sesion</a>
+    <h1>Hola Técnico</h1>
+    <a href="../controlador/Logout.php">Cerrar sesión</a>
 </body>
 </html>
 <?php 
