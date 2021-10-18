@@ -96,20 +96,24 @@ if($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 3 ){
                </button>
            </div>
            <div class="card-body">
-             <div class="alert alert-success text-center" id="add" style="display: none;">
+           <div class="alert alert-success text-center" id="add-tipo" style="display: none;">
               <span><i class="fas fa-check m-1"></i>Tipo agregado correctamente.</span>
             </div>
-            <div class="alert alert-danger text-center" id="noadd" style="display: none;">
-                <span><i class="fas fa-times m-1"></i>Este tipo ya se encuentra registrado.</span>
+            <div class="alert alert-danger text-center" id="noadd-tipo" style="display: none;">
+                <span><i class="fas fa-times m-1"></i>El tipo ya se encuentra registrado.</span>
+            </div>
+            <div class="alert alert-success text-center" id="edit-tip" style="display: none;">
+              <span><i class="fas fa-check m-1"></i>Tipo editado correctamente.</span>
             </div>
              <form id="form-crear-tipo">
                 <div class="form-group">
                     <label for="nombre-tipo">Nombre</label>
                     <input id="nombre-tipo" type="text" class="form-control" placeholder="Ingrese nombre" required>
+                    <input type="hidden" id="id_editar_tip">
                 </div>
            </div>
            <div class="card-footer">
-                <button type="submit" class="btn bg-gradient-primary float-right m-1">Crear</button>
+                <button type="submit" class="btn bg-gradient-primary float-right m-1">Guardar</button>
                 <button type="button" data-dismiss="modal" class="btn btn-outline-secondary float-right m-1">Cerrar</button>
             </form>
            </div>
@@ -129,20 +133,24 @@ if($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 3 ){
                </button>
            </div>
            <div class="card-body">
-             <div class="alert alert-success text-center" id="add" style="display: none;">
-              <span><i class="fas fa-check m-1"></i>Presentación agregada correctamente.</span>
-            </div>
-            <div class="alert alert-danger text-center" id="noadd" style="display: none;">
-                <span><i class="fas fa-times m-1"></i>La presentación ya se encuentra registrada.</span>
-            </div>
+             <div class="alert alert-success text-center" id="add-pre" style="display: none;">
+               <span><i class="fas fa-check m-1"></i>Agregado correctamente.</span>
+             </div>
+              <div class="alert alert-danger text-center" id="noadd-pre" style="display: none;">
+                <span><i class="fas fa-times m-1"></i>La presentación ya se encuentra registrado.</span>
+               </div>
+                <div class="alert alert-success text-center" id="edit-pre" style="display: none;">
+                  <span><i class="fas fa-check m-1"></i>Editado correctamente.</span>
+                </div>
              <form id="form-crear-presentacion">
                 <div class="form-group">
                     <label for="nombre-presentacion">Nombre</label>
                     <input id="nombre-presentacion" type="text" class="form-control" placeholder="Ingrese nombre" required>
+                    <input type="hidden" id="id_editar_pre">
                 </div>
            </div>
            <div class="card-footer">
-                <button type="submit" class="btn bg-gradient-primary float-right m-1">Crear</button>
+                <button type="submit" class="btn bg-gradient-primary float-right m-1">Guardar</button>
                 <button type="button" data-dismiss="modal" class="btn btn-outline-secondary float-right m-1">Cerrar</button>
             </form>
            </div>
@@ -225,7 +233,19 @@ if($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 3 ){
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="card-body"></div>
+                                        <div class="card-body p-0 table-responsive">
+                                            <table class="table table-hover text-nowrap">
+                                                <thead class="table-success">
+                                                   <tr>
+                                                       <th>Acción</th>
+                                                       <th>Tipos</th>  
+                                                   </tr> 
+                                                </thead>
+                                                <tbody class="table-active" id="tipos"> 
+
+                                                </tbody>
+                                            </table>
+                                        </div>
                                         <div class="card-footer"></div>
                                     </div>
                                 </div>
@@ -240,7 +260,19 @@ if($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 3 ){
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="card-body"></div>
+                                        <div class="card-body p-0 table-responsive">
+                                            <table class="table table-hover text-nowrap">
+                                                <thead class="table-success">
+                                                   <tr>
+                                                       <th>Acción</th>
+                                                       <th>Presentación</th>  
+                                                   </tr> 
+                                                </thead>
+                                                <tbody class="table-active" id="presentaciones"> 
+
+                                                </tbody>
+                                            </table>
+                                        </div>
                                         <div class="card-footer"></div>
                                     </div>
                                 </div>
@@ -265,3 +297,5 @@ else{
 }
 ?>
 <script src="../js/Laboratorio.js"></script>
+<script src="../js/Tipo.js"></script>
+<script src="../js/Presentacion.js"></script>

@@ -1,7 +1,7 @@
 <?php 
 
 include '../modelo/Laboratorio.php';
-$laboratorio=new Laboratorio();
+$laboratorio=new Laboratorio(); 
 
 
 
