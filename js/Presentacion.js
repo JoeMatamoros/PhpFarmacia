@@ -10,7 +10,7 @@ $(document).ready(function(){
         if(edit == false){
             funcion='crear';
         }else {
-            funcion ='editar';
+            funcion ='editar'; 
         }
         
 
