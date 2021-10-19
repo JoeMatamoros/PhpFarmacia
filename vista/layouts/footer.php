@@ -16,5 +16,7 @@
 <script src="../js/demo.js"></script>
 <!-- SweetAlert2 -->
 <script src="../js/sweetalert2.js"></script>
+<!-- Select2 -->
+<script src="../js/select2.js"></script>
 </body>
 </html>

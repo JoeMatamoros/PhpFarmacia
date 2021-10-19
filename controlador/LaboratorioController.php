@@ -67,4 +67,19 @@ if($_POST['funcion'] == 'borrar'){
     $laboratorio->borrar($id);
 
 }
+
+if($_POST['funcion'] == 'rellenar_laboratorios'){
+    $laboratorio->rellenar_laboratorios();
+    $json=array();
+    foreach ($laboratorio->objetos as $objeto) {
+        $json[]=array(
+            'id'=>$objeto->id_laboratorio,
+            'nombre'=>$objeto->nombre
+        );
+    }
+    $jsonstring=json_encode($json);
+    echo $jsonstring;
+
+}
+
 ?>

@@ -1,6 +1,8 @@
 <!-- Google Font: Source Sans Pro -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
- <!-- SweetAlert2 -->
+ <!-- Select2 -->
+ <link rel="stylesheet" href="../css/select2.css">  
+<!-- SweetAlert2 -->
  <link rel="stylesheet" href="../css/sweetalert2.css"> 
 <!-- Font Awesome -->
   <link rel="stylesheet" href="../css/css/all.min.css">
@@ -27,7 +29,6 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-   
       <a href="../controlador/Logout.php">Cerrar sesion</a>
     </ul>
   </nav>
@@ -77,11 +78,15 @@
           </li>
           <li class="nav-header">Almacén</li>
           <li class="nav-item">
+            <a href="adm_producto.php" class="nav-link">
+              <i class="nav-icon fas fa-pills"></i>
+               <p> Gestión producto</p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="adm_atributo.php" class="nav-link">
               <i class="nav-icon fas fa-vials"></i>
-              <p>
-                Gestión atributo
-              </p>
+               <p> Gestión atributo</p>
             </a>
           </li>
         </ul>

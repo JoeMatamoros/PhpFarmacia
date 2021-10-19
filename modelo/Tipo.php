@@ -61,6 +61,14 @@ class Tipo{
         $query->execute(array(':id'=>$id_editado,':nombre'=>$nombre));
         echo 'edit';
     }
+
+    function rellenar_tipos(){
+        $sql="SELECT * FROM tipo_producto  order by nombre asc";
+        $query = $this->acceso->prepare($sql);
+        $query->execute();
+        $this->objetos= $query->fetchall();
+        return $this->objetos;
+    }
 }
 
 
