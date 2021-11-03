@@ -1,5 +1,5 @@
-# PhpFarmacia
-Sistema farmacia
+ PhpFarmacia
+# Sistema farmacia
 
 Módulo de login
 ![LoginFarmacia](https://user-images.githubusercontent.com/73661759/137224403-709d2a62-d0f0-480b-b915-7e3dd0d9b6bf.jpg)
