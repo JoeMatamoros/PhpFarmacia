@@ -97,8 +97,8 @@
           </li>
           <li class="nav-header">Compras</li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-pills"></i>
+            <a href="adm_proveedor.php" class="nav-link">
+              <i class="nav-icon fas fa-truck"></i>
                <p> Gestión proveedor</p>
             </a>
           </li>

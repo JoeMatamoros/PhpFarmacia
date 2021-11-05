@@ -80,4 +80,10 @@ if($_POST['funcion'] == 'cambiar_avatar'){
     
        }     
 }
+
+if($_POST['funcion'] == 'borrar'){
+    $id=$_POST['id'];
+    $producto->borrar($id);
+
+}
 ?>
