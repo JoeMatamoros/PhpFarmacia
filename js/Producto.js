@@ -1,5 +1,6 @@
 $(document).ready(function(){
     var funcion;
+    var edit=false;
     $('.select2').select2();
     rellenar_laboratorios();
     rellenar_tipos();
@@ -52,7 +53,7 @@ $(document).ready(function(){
     }
 
     $('#form-crear-producto').submit(e=>{
-        
+        let id=$('#id_edit_prod').val();
         let nombre=$('#nombre_producto').val();
         let concentracion=$('#concentracion').val();
         let adicional=$('#adicional').val();
@@ -60,23 +61,36 @@ $(document).ready(function(){
         let laboratorio=$('#laboratorio').val();
         let tipo=$('#tipo').val();
         let presentacion=$('#presentacion').val();
-        funcion="crear";
+
+        if(edit == true){
+          funcion="editar";
+        }else{
+          funcion="crear";
+        }
         
-        $.post('../controlador/ProductoController.php',{funcion,nombre,concentracion,adicional,precio,laboratorio,tipo,presentacion},(response)=>{
+        $.post('../controlador/ProductoController.php',{funcion,id,nombre,concentracion,adicional,precio,laboratorio,tipo,presentacion},(response)=>{
             if(response == 'add'){
                 $('#add').hide('slow');
                 $('#add').show(1000);
                 $('#add').hide(2000);
                 $('#form-crear-producto').trigger('reset');
+                buscar_producto();
 
             }
-            if(response == 'noadd'){
-                $('#noadd').hide('slow');
-                $('#noadd').show(1000);
-                $('#noadd').hide(2000);
+            if(response == 'edit'){
+                $('#edit_prod').hide('slow');
+                $('#edit_prod').show(1000);
+                $('#edit_prod').hide(2000);
                 $('#form-crear-producto').trigger('reset');
+                buscar_producto();
+                
+            } else {
+              $('#noadd').hide('slow');
+              $('#noadd').show(1000);
+              $('#noadd').hide(2000);
+              $('#form-crear-producto').trigger('reset');
             }
-            buscar_producto();
+           
         });
 
         e.preventDefault();
@@ -90,7 +104,7 @@ $(document).ready(function(){
             let template='';
             productos.forEach(producto=>{
                 template+=`
-                <div prodId="${producto.id}" prodStock="${producto.stock}" prodNombre="${producto.nombre}" prodPrecio="${producto.precio}" prodConcentracion="${producto.concentracion}" prodAdicional="${producto.adicional}" prodLaboratorio="${producto.laboratorio}" prodTipo="${producto.tipo}" prodPresentacion="${producto.presentacion}" prodavatar="${producto.avatar}" class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
+                <div prodId="${producto.id}" prodNombre="${producto.nombre}" prodPrecio="${producto.precio}" prodConcentracion="${producto.concentracion}" prodAdicional="${producto.adicional}" prodLaboratorio="${producto.laboratorio_id}" prodTipo="${producto.tipo_id}" prodPresentacion="${producto.presentacion_id}" prodavatar="${producto.avatar}" class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch flex-column">
                 <div class="card bg-light d-flex flex-fill">
                   <div class="card-header text-muted border-bottom-0">
                   <i class="fas fa-lg fa-cubes mr-1"></i>${producto.stock}
@@ -115,10 +129,10 @@ $(document).ready(function(){
                   </div>
                   <div class="card-footer">
                     <div class="text-right">
-                      <button class="avatar btn btn-sm bg-teal">
+                      <button class="avatar btn btn-sm bg-teal" type="button" data-toggle="modal" data-target="#cambiologo">
                         <i class="fas fa-image"></i>
                       </button>
-                      <button class="editar btn btn-sm btn-success">
+                      <button class="editar btn btn-sm btn-success" type="button" data-toggle="modal" data-target="#crearproducto">
                         <i class="fas fa-pencil-alt"></i>
                       </button>
                       <button class="lote btn btn-sm btn-primary">
@@ -156,9 +170,70 @@ $(document).ready(function(){
         const elemento=$(this)[0].activeElement.parentElement.parentElement.parentElement.parentElement;
         const id=$(elemento).attr('prodId');
         const avatar=$(elemento).attr('prodAvatar');
-        console.log(id+' '+avatar);
+        const nombre=$(elemento).attr('prodNombre');
+        $('#funcion').val(funcion);
+        $('#id_logo_prod').val(id);
+        $('#avatar').val(avatar);
+        $('#logoactual').attr('src',avatar);
+        $('#nombre_logo').html(nombre);
     })
 
+    $('#form-logo').submit(e=>{
+      let formData = new FormData($('#form-logo')[0]);
+      $.ajax({
+        url:'../controlador/ProductoController.php',
+        type:'POST',
+        data:formData,
+        cache:false,
+        processData:false,
+        contentType:false
 
+      }).done(function(response){
+        //console.log(response);
+        const json = JSON.parse(response);
+        if(json.alert == 'edit'){
+          $('#logoactual').attr('src',json.ruta);
+          $('#edit').hide('slow');
+          $('#edit').show(1000);
+          $('#edit').hide(2000);
+          $('#form-logo').trigger('reset');
+          buscar_producto();
+
+        }else {
+          $('#noedit').hide('slow');
+          $('#noedit').show(1000);
+          $('#noedit').hide(2000);
+          $('#form-logo').trigger('reset');
+        }
+
+      });
+
+      e.preventDefault();
+    });
+
+    $(document).on('click','.editar',(e)=>{
+      const elemento=$(this)[0].activeElement.parentElement.parentElement.parentElement.parentElement;
+      const id=$(elemento).attr('prodId');
+      const nombre=$(elemento).attr('prodNombre');
+      const concentracion=$(elemento).attr('prodConcentracion');
+      const adicional =$(elemento).attr('prodAdicional');
+      const precio=$(elemento).attr('prodPrecio');
+      const laboratorio=$(elemento).attr('prodLaboratorio');
+      const tipo=$(elemento).attr('prodTipo');
+      const presentacion=$(elemento).attr('prodPResentacion');
+
+      /*.trigger('change') para cambiar los valores del combobox por los correspondientes.*/ 
+      $('#id_edit_prod').val(id);
+      $('#nombre_producto').val(nombre);
+      $('#concentracion').val(concentracion);
+      $('#adicional').val(adicional);
+      $('#precio').val(precio);
+      $('#laboratorio').val(laboratorio).trigger('change');
+      $('#tipo').val(tipo).trigger('change');
+      $('#presentacion').val(presentacion).trigger('change');
+      edit=true;
+
+      
+  })
 
 })

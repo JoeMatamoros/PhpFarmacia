@@ -89,6 +89,19 @@
                <p> Gestión atributo</p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="adm_atributo.php" class="nav-link">
+              <i class="nav-icon fas fa-square"></i>
+               <p> Gestión lote</p>
+            </a>
+          </li>
+          <li class="nav-header">Compras</li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-pills"></i>
+               <p> Gestión proveedor</p>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
