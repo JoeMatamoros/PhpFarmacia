@@ -19,10 +19,10 @@ if($_SESSION['us_tipo'] == 1 || $_SESSION['us_tipo'] == 3){
                </button>
            </div>
            <div class="card-body">
-             <div class="alert alert-success text-center" id="add" style="display: none;">
-              <span><i class="fas fa-check m-1"></i>Proveedpr agregado correctamente.</span>
+             <div class="alert alert-success text-center" id="add-prov" style="display: none;">
+              <span><i class="fas fa-check m-1"></i>Proveedor agregado correctamente.</span>
             </div>
-            <div class="alert alert-danger text-center" id="noadd" style="display: none;">
+            <div class="alert alert-danger text-center" id="noadd-prov" style="display: none;">
                 <span><i class="fas fa-times m-1"></i>El proveedor ya se encuentra registrado.</span>
             </div>
              <form id="form-crear">
