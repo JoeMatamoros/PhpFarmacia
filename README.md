@@ -2,7 +2,7 @@
 # Sistema farmacia
 
 Módulo de login
-![LoginFarmacia](https://user-images.githubusercontent.com/73661759/137224403-709d2a62-d0f0-480b-b915-7e3dd0d9b6bf.jpg)
+![Captura de pantalla 2022-07-14 145353](https://user-images.githubusercontent.com/73661759/179084386-49021e18-8127-420d-a8c4-cb3d8eeb9451.jpg)
 
 # UI y alertas del sistema
 ![SharedScreenshot](https://user-images.githubusercontent.com/73661759/137444027-969659c8-ba60-458d-9e70-098aee8cd11f.jpg)
