@@ -100,7 +100,9 @@ $(document).ready(function(){
         $('#nombre_logo').html(nombre);
         $('#funcion').val(funcion);
         $('#id_logo_lab').val(id);
+        $('#avatar').val(avatar);
     })
+    
       /*MANDAR LOS DATOS AL FORMULARIO DE LOGO */
      $('#form-logo').submit(e=>{
         let formData = new FormData($('#form-logo')[0]);

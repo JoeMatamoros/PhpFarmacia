@@ -218,7 +218,7 @@ $(document).ready(function(){
 
       });
 
-      e.preventDefault();
+      e.preventDefault(); 
     });
 
     $(document).on('click','.editar',(e)=>{

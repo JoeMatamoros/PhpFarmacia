@@ -2,6 +2,7 @@ $(document).ready(function(){
     var funcion;
     buscar_prov();
 
+    /*FUNCION PARA CREAR PROVEEDOR */
      $('#form-crear').submit(e=>{
         let nombre = $('#nombre').val();
         let telefono = $('#telefono').val();
@@ -60,15 +61,15 @@ $(document).ready(function(){
                     </div>
                     <div class="card-footer">
                         <div class="text-right">
-                        <button class="avatar btn btn-sm btn-info" title="Cambiar avatar">
+                        <button class="avatar btn btn-sm btn-info" title="Cambiar avatar" type="button" data-toggle="modal" data-target="#cambiologo" aria-hidden="true">
                             <i class="fas fa-image"></i>
                         </button>
 
-                        <button class="avatar btn btn-sm btn-success" title="Editar proveedor">
+                        <button class="editar btn btn-sm btn-success" title="Editar proveedor">
                             <i class="fas fa-pencil-alt"></i>
                          </button>
 
-                        <button class="avatar btn btn-sm btn-danger" title="Eliminar proveedor">
+                        <button class="borrar btn btn-sm btn-danger" title="Eliminar proveedor">
                             <i class="fas fa-trash"></i>
                         </button>
                         </div>
@@ -82,7 +83,7 @@ $(document).ready(function(){
         })
     }
 
-
+    /*BUSCADOR DINAMICO*/
     $(document).on('keyup','#buscar_proveedor',function(){
         let valor = $(this).val();
         if(valor !=""){
@@ -91,4 +92,110 @@ $(document).ready(function(){
             buscar_prov();
         }
     })
+
+    /*PASAR DATOS DE PROVEEDOR AL HTML*/
+    $(document).on('click','.avatar',(e)=>{
+        funcion = "cambiar_logo";
+        const elemento = $(this)[0].activeElement.parentElement.parentElement.parentElement.parentElement;
+        const id = $(elemento).attr('provId');
+        const nombre = $(elemento).attr('provNombre');
+        const avatar = $(elemento).attr('provAvatar');
+
+       $('#logoactual').attr('src', avatar);
+       $('#nombre_logo').html(nombre);
+       $('#funcion').val(funcion);
+       $('#id_logo_prov').val(id);
+       $('#avatar').val(avatar);
+    
+    });
+
+    /*FUNCION PARA CAMBIAR AVATAR */
+    $('#form-logo').submit(e=>{
+        let formData = new FormData($('#form-logo')[0]);
+        $.ajax({
+            url:'../controlador/ProveedorController.php',
+            type:'POST',
+            data:formData,
+            cache:false,
+            processData:false,
+            contentType:false
+        }).done(function(response){
+         const json = JSON.parse(response);
+         if(json.alert == 'edit'){
+             $('#logoactual').attr('src',json.ruta);
+             $('#form-logo').trigger('reset');
+             $('#edit-prov').hide('slow');
+             $('#edit-prov').show(1000);
+             $('#edit-prov').hide(2000);
+            buscar_prov();
+         } else{
+            $('#noedit-prov').hide('slow');
+            $('#noedit-prov').show(1000);
+            $('#noedit-prov').hide(2000);
+            $('#form-logo').trigger('reset');
+         }
+          
+        });
+        e.preventDefault();
+    });
+
+    /*FUNCION PARA ELIMINAR */
+    $(document).on('click','.borrar',(e)=>{
+
+        funcion="borrar";
+        const elemento=$(this)[0].activeElement.parentElement.parentElement.parentElement.parentElement;
+        //console.log(elemento);
+        const id = $(elemento).attr('provId');
+        const nombre = $(elemento).attr('provNombre');
+        const avatar = $(elemento).attr('provAvatar');
+        
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+              confirmButton: 'btn btn-success',
+              cancelButton: 'btn btn-danger mr-1'
+            },
+            buttonsStyling: false
+          })
+          
+          swalWithBootstrapButtons.fire({
+            title: 'Desea eliminar el proveedor '+nombre+'?',
+            text: "No podrás revertir la acción.",
+            imageUrl:''+avatar+'',
+            imageWidth:100,
+            imageHeight:100,
+            showCancelButton: true,
+            confirmButtonText: 'Si, deseo eliminar!',
+            cancelButtonText: 'No, cancelar!',
+            reverseButtons: true
+          }).then((result) => {
+            if (result.isConfirmed) {
+                $.post('../controlador/ProveedorController.php',{id,funcion},(response)=>{
+                    
+                    if(response == 'borrado'){
+                        swalWithBootstrapButtons.fire(
+                            'Eliminado!',
+                            'El proveedor '+nombre+' fue eliminado',
+                            'success'
+                          )
+                          buscar_prov();
+                    } else{
+                        swalWithBootstrapButtons.fire(
+                            'No se pudo eliminar!',
+                            'El proveedor '+nombre+' no fue eliminado porque está siendo usado en un producto.',
+                            'error'
+                          ) 
+                    }
+                })
+              
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+                swalWithBootstrapButtons.fire(
+                  'Cancelado!',
+                  'El proveedor '+nombre+' no fue eliminado',
+                  'error'
+                )  
+            }
+          })
+    })
+
+
 });
